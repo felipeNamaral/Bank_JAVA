@@ -19,15 +19,21 @@ public class Account {
 
     }
 
-    public void withdraw(double value) {
-        if (value > balance) {
-            if (value < limit) {
-                balance -= value;
-            }
-        } else if (value <= balance) {
-            balance -= value;
-        }
+public void withdraw(double value) {
+    if (value <= 0) {
+        System.out.println("Valor inválido para saque.");
+        return;
     }
+    if (value <= balance) {
+        balance -= value;
+        System.out.println("Saque realizado com sucesso!");
+    } else if (value <= balance + limit) {
+        balance -= value;
+        System.out.println("Saque realizado usando o limite!");
+    } else {
+        System.out.println("Saldo e limite insuficientes.");
+    }
+}
 
     public void changePassword(String oldPass, String newPass)
     {
@@ -42,9 +48,13 @@ public class Account {
 
 
     public void deposit(double depositAmount) {
-        if (depositAmount > 0.0)
-            balance = balance + depositAmount;
+    if (depositAmount > 0.0) {
+        balance += depositAmount;
+        System.out.println("Depósito realizado com sucesso!");
+    } else {
+        System.out.println("Valor inválido para depósito.");
     }
+}
 
     public void imprimeDados() {
         System.out.printf("Conta: %d | Nome: %s | Saldo: %.2f | Limite: %.2f%n", number, name, balance, limit);

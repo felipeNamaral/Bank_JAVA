@@ -1,15 +1,59 @@
 import java.util.Scanner;
 
 public class AccountTest {
+
+        public static void clearScreen() {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+        }
+
+        public static void pause() {
+                System.out.println("Pressione ENTER para continuar...");
+                try {
+                        System.in.read();
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
+        }
+
         public static void main(String[] args) {
                 Scanner input = new Scanner(System.in);
                 String aux, aux2;
                 double valor;
-                Account account1 = new Account("Jame Green", 1234, 1000.00);
-                Account account2 = new Account("John Blue", 34567, 2000.00);
-                Account account3 = new Account("John red", 43548, 3000.00);
+
+                Account[] contas = {
+                                new Account("Jame Green", 1234, 1000.00),
+                                new Account("John Blue", 34567, 2000.00),
+                                new Account("John red", 43548, 3000.00)
+                };
+
+                System.out.println("======================================");
+                System.out.println("       BEM-VINDO AO BANCO JAVA       ");
+                System.out.println("======================================");
+                System.out.println("      Seu dinheiro em boas mãos!      ");
+                System.out.println("======================================\n");
+                pause();
+
+                System.out.print("Digite o número da conta:");
+                int cont = input.nextInt();
+                boolean encontrada = false;
+
+                for (int i = 0; i < contas.length; i++) {
+                        if (contas[i].getNumber() == cont) {
+                                cont = i;
+                                encontrada = true;
+                                break;
+                                
+                        }
+
+                }
+                if (!encontrada) {
+                        System.out.println("Conta " + cont + " não encontrada!");
+                        System.exit(0);
+                }
 
                 while (true) {
+                        clearScreen();
                         System.out.println("====== MENU DO BANCO ======");
                         System.out.println("1. Ver saldo");
                         System.out.println("2. Depositar");
@@ -25,26 +69,28 @@ public class AccountTest {
                         switch (opcao) {
                                 case 1:
                                         // Ver saldo
-                                        account1.imprimeDados();
-                                        account2.imprimeDados();
-                                        account3.imprimeDados();
+                                        contas[cont].imprimeDados();
+                                        pause();
                                         break;
                                 case 2:
-                                        // Depositar (exemplo simples para a conta 1)
-
+                                        System.out.print("Digite quanto quer depositar: ");
+                                        valor = input.nextDouble();
+                                        contas[cont].deposit(valor);
+                                        pause();
                                         break;
                                 case 3:
                                         System.out.print("Digite quanto quer sacar: ");
                                         valor = input.nextDouble();
-                                        account1.withdraw(valor);
+                                        contas[cont].withdraw(valor);
+                                        pause();
                                         break;
                                 case 4:
                                         System.out.print("Digite a senha antiga: ");
                                         aux = input.nextLine();
                                         System.out.print("Digite a senha nova: ");
                                         aux2 = input.nextLine();
-                                        account1.changePassword(aux, aux2);
-
+                                        contas[cont].changePassword(aux, aux2);
+                                        pause();
                                         break;
                                 case 5:
                                         System.out.println("Saindo do sistema...");
