@@ -22,9 +22,9 @@ public class AccountTest {
                 double valor;
 
                 Account[] contas = {
-                                new Account("Jame Green", 1234, 1000.00),
-                                new Account("John Blue", 34567, 2000.00),
-                                new Account("John red", 43548, 3000.00)
+                                new Account("Jame Green", 1234, 1000.00,new Date(2, 29, 2024)),
+                                new Account("John Blue", 34567, 2000.00,new Date(9, 9, 2025)),
+                                new Account("John red", 43548, 3000.00,new Date(9, 9, 2025))
                 };
 
                 System.out.println("======================================");

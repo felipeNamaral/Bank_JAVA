@@ -4,6 +4,7 @@ public class Account {
     private int number;
     private double limit;
     private String senha;
+    private Date openingDate;
 
     public Account() {
         this.balance = 0.0;
@@ -11,11 +12,12 @@ public class Account {
 
     }
 
-    public Account(String name, int number, double limit) {
+    public Account(String name, int number, double limit,Date openimDate) {
         this();
         this.name = name;
         this.number = number;
         this.limit = limit;
+        this.openingDate=openimDate;
 
     }
 
@@ -86,5 +88,9 @@ public void withdraw(double value) {
 
     public double getLimit() {
         return limit;
+    }
+
+    public Date getOpeningDate() {
+        return openingDate;
     }
 }
